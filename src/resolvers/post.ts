@@ -1,6 +1,7 @@
-//  hello schema using type-graphql
+//  Post schema using type-graphql
 import { MyContext } from 'src/types';
 import { Arg, Ctx, Mutation, Query, Resolver } from 'type-graphql';
+
 import { Post } from '../entities/Posts';
 
 @Resolver()

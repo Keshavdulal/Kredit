@@ -6,8 +6,9 @@ import { MikroORM } from '@mikro-orm/core';
 import mikroOrmConfig from './mikro-orm.config';
 import { ApolloServer } from 'apollo-server-express';
 
-import { PostResolver } from './resolvers/post';
 import { HelloResolver } from './resolvers/hello';
+import { PostResolver } from './resolvers/post';
+import { UserResolver } from './resolvers/user';
 
 const PORT = process.env.PORT || 4000;
 
@@ -22,7 +23,7 @@ const main = async () => {
     const apolloServer = new ApolloServer({
         // pass graphql schema
         schema: await buildSchema({
-            resolvers: [HelloResolver, PostResolver],
+            resolvers: [HelloResolver, PostResolver, UserResolver],
             validate: false,
         }),
         // special object accessed by all resolvers
