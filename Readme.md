@@ -6,16 +6,16 @@ Video Link - https://www.youtube.com/watch?v=I6ypD7qv3Z8
 
 ## Tech Stacks used
 
-- React JS
-- TypeScript
-- GraphQL
-- URQL / Appolo
-- Node.js
-- PostgreSQL
-- MikroORM/TypeORM
-- Redis
-- Next.js
-- TypeGraphQL
+-   React JS
+-   TypeScript
+-   GraphQL
+-   URQL / Appolo
+-   Node.js
+-   PostgreSQL
+-   MikroORM/TypeORM
+-   Redis
+-   Next.js
+-   TypeGraphQL
 
 # Project Setup
 
@@ -28,11 +28,11 @@ Video Link - https://www.youtube.com/watch?v=I6ypD7qv3Z8
 
 ### 1. VS Code Extensions Recommended
 
-- Bracket Pair Colorizer
-- Docker
-- GraphQL For VS Code
-- Prettier
-- Vim
+-   Bracket Pair Colorizer
+-   Docker
+-   GraphQL For VS Code
+-   Prettier
+-   Vim
 
 ### 2. Initiate a npm package
 
@@ -108,4 +108,32 @@ Express doesn't come written in TypeScript. So install types for it.
 
 ```
 yarn add -D @types/express
+```
+
+## Install `argon2` for hashing passwords
+
+```
+yarn add argon2
+```
+
+Something that came in the middle of video
+
+```
+yarn add reflect-metadata
+```
+
+## Redis setup for user session management
+
+```
+yarn add redis connect-redis express-session
+```
+
+`redis` - Redis Client
+`connect-redis` - provides Redis session storage for Express
+`express-session` - Express Middleware
+
+## Install types
+
+```
+yarn add -D @types/redis @types/connect-redis @types/express-session
 ```

@@ -6,6 +6,7 @@ import {
     Ctx,
     Field,
     InputType,
+    Query,
     Mutation,
     ObjectType,
     Resolver,
@@ -42,6 +43,15 @@ class UserResponse {
 
 @Resolver()
 export class UserResolver {
+    // CURRENT USER
+    @Query(() => User, { nullable: true })
+    async me(@Ctx() { req, em }: MyContext) {
+        if (!req.session.id) {
+            return null;
+        }
+        const user = await em.findOne(User, { id: req.session.userId });
+        return user;
+    }
     // CREATE USER / SIGN UP
     @Mutation(() => UserResponse)
     async register(
@@ -89,7 +99,7 @@ export class UserResolver {
     @Mutation(() => UserResponse)
     async login(
         @Arg('options') options: UsernamePasswordInput,
-        @Ctx() { em }: MyContext
+        @Ctx() { em, req }: MyContext
     ): Promise<UserResponse> {
         // lookup user by username
         const user = await em.findOne(User, { username: options.username });
@@ -114,6 +124,12 @@ export class UserResolver {
                 ],
             };
         }
+
+        // store user id session
+        // set cookie in user
+        // keep them logged in
+        req.session.userId = user.id;
+
         return {
             user,
         };
