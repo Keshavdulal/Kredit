@@ -1,3 +1,4 @@
+import cors from 'cors';
 import 'reflect-metadata';
 import express from 'express';
 import { __prod__ } from './constants';
@@ -10,7 +11,6 @@ import redis from 'redis';
 import session from 'express-session';
 import connectRedis from 'connect-redis';
 
-import { MyContext } from './types';
 import { HelloResolver } from './resolvers/hello';
 import { PostResolver } from './resolvers/post';
 import { UserResolver } from './resolvers/user';
@@ -29,6 +29,12 @@ const main = async () => {
     // Redis
     const RedisStore = connectRedis(session);
     const redisClient = redis.createClient();
+
+    // CORS
+    app.use(
+        //'/', // coupld apply to a specific route
+        cors({ origin: 'http://localhost3000', credentials: true })
+    );
 
     app.use(
         session({
@@ -59,11 +65,15 @@ const main = async () => {
             validate: false,
         }),
         // special object accessed by all resolvers
-        context: ({ req, res }): MyContext => ({ em: orm.em, req, res }),
+        context: ({ req, res }) => ({ em: orm.em, req, res }),
     });
 
     // create graphql endpoint in express using apollo
-    apolloServer.applyMiddleware({ app });
+    apolloServer.applyMiddleware({
+        app,
+        cors: false,
+        // cors: { origin: 'https://localhost:3000' },
+    });
 
     app.listen(PORT, () => {
         console.log(`App Running at port ${PORT}`);

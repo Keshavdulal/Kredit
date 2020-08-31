@@ -9,7 +9,7 @@ Video Link - https://www.youtube.com/watch?v=I6ypD7qv3Z8
 -   React JS
 -   TypeScript
 -   GraphQL
--   URQL / Appolo
+-   URQL / Apollo
 -   Node.js
 -   PostgreSQL
 -   MikroORM/TypeORM
