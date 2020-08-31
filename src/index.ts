@@ -31,10 +31,7 @@ const main = async () => {
     const redisClient = redis.createClient();
 
     // CORS
-    app.use(
-        //'/', // coupld apply to a specific route
-        cors({ origin: 'http://localhost3000', credentials: true })
-    );
+    app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 
     app.use(
         session({
